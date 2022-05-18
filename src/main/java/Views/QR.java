@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.UserController;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -19,6 +20,7 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
     private WebcamPanel panel = null ;
     private Webcam webcam = null ;
     private Executor executor = Executors.newSingleThreadExecutor(this);
+    private JFrame frame = new JFrame("Webcam");
 
 
 
@@ -32,7 +34,6 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
         JPanel container = new JPanel();
         executor.execute(this);
         container.add(panel, BorderLayout.CENTER);
-        JFrame frame = new JFrame("Webcam");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(container);
         frame.pack();
@@ -43,6 +44,7 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
     @Override
     public void run() {
+        boolean Res = true ;
          do{
              try {
                  Thread.sleep(100);
@@ -65,8 +67,19 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
              }
              if(result != null){
                  System.out.println(result.getText());
+                 for(int i=0;i<result.getText().length();i++){
+                     if(result.getText().charAt(i) == ':'){
+                         String Mail = result.getText().substring(0,i);
+                            String Password = result.getText().substring(i+1);
+                         UserController uc = new UserController();
+                         uc.Login(Mail,Password);
+                         frame.setVisible(false);
+                         Res=false;
+
+                     }
+                 }
              }
-         }while (true);
+         }while (Res);
     }
 
     @Override

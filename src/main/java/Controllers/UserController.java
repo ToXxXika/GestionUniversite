@@ -107,6 +107,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
                         E.setPassword(P.getPassword());
                         EtudiantSign(E);
                         Res = true ;
+                        break;
 
                     } case "Enseignant" : {
                         Enseignants E = new Enseignants();
@@ -145,9 +146,9 @@ public class UserController extends DbConnection implements UtilisateurInterface
                 int j = Ps2.executeUpdate();
                 if (j > 0) {
                     //TODO: SEND MAIL TO THE SPECIFIC USER
-                    CreateQrCode(E.getNom(),E.getCin(),E.getMail(),E.getPassword());
-                    Res = true ;
+                    CreateQrCode(E.getMail()+":"+E.getPassword(),E.getNom()+""+E.getPrenom(),E.getMail(),E.getPassword());
                     System.out.println("Etudiant Inscrit");
+                    Res = true ;
                 }
             }
         } catch (Exception EX) {
@@ -159,9 +160,9 @@ public class UserController extends DbConnection implements UtilisateurInterface
         try {
             String qrCodeText = NomPrenom;
             System.out.println(qrCodeText);
-            String filePath = nameProd + ".png";
+            String filePath = nameProd + ".jpg";
             int size = 125;
-            String fileType = "png";
+            String fileType = "jpg";
             File qrFile = new File(filePath);
             createQrImage(qrFile, qrCodeText, size, fileType, mail,Password);
             System.out.println("DONE");
@@ -246,13 +247,14 @@ public class UserController extends DbConnection implements UtilisateurInterface
                 MimeMessage message = new MimeMessage(session);
             Multipart multipart = new MimeMultipart();
             MimeBodyPart messageBodyPart = new MimeBodyPart();
+            //messageBodyPart.setContent("<h1>Bienvenue sur notre site</h1><br><br>Votre Mail est :"+mail+" Votre mot de passe est : "+Password+"<br><br>Vous pouvez vous connecter avec ce mot de passe et changer votre mot de passe dans votre profil", "text/html");
             messageBodyPart.attachFile(file);
-            messageBodyPart.setContent("<h1>Bienvenue sur notre site</h1><br><br>Votre Mail est :"+mail+" Votre mot de passe est : "+Password+"<br><br>Vous pouvez vous connecter avec ce mot de passe et changer votre mot de passe dans votre profil", "text/html");
             multipart.addBodyPart(messageBodyPart);
             message.setContent(multipart);
             message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject("Bienvenue sur notre site");
+
             Transport.send(message);
             System.out.println("Mail envoyé");
     }catch (Exception e){

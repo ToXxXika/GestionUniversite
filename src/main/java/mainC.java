@@ -32,5 +32,7 @@ public class mainC {
         UserController Uc = new UserController();
         Personne P = new Personne("07220650","Mohamed","Bouhlel","ikasou.666@gmail.com","123456","Etudiant");
         Uc.SignIn(P,125,125);
+        QR qr = new QR();
+        qr.initWebcam();
      }
 }
