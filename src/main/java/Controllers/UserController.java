@@ -278,5 +278,22 @@ public class UserController extends DbConnection implements UtilisateurInterface
         }
         return Res;
     }
+
+    @Override
+    public String getEtudiantByRole(String mail) {
+        String Res = "";
+        String Sql = "Select * from personne where mail = ?";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(Sql);
+            Ps.setString(1, mail);
+            ResultSet Rs = Ps.executeQuery();
+            if (Rs.next()) {
+                Res = Rs.getString("role");
+            }
+        }catch (Exception Ex){
+            System.out.println(Ex.getMessage());
+        }
+        return Res;
+    }
 }
 

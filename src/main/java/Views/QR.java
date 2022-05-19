@@ -21,7 +21,7 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
     private Webcam webcam = null ;
     private Executor executor = Executors.newSingleThreadExecutor(this);
     private JFrame frame = new JFrame("Webcam");
-
+    private JPanel pane;
 
 
     public void initWebcam(){
@@ -72,9 +72,14 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
                          String Mail = result.getText().substring(0,i);
                             String Password = result.getText().substring(i+1);
                          UserController uc = new UserController();
-                         uc.Login(Mail,Password);
-                         frame.setVisible(false);
-                         Res=false;
+                         if(uc.Login(Mail,Password)){
+                             frame.setVisible(false);
+                             JOptionPane.showMessageDialog(null,"Bienvenue");
+                             Res=false;
+                         }else{
+                             JOptionPane.showMessageDialog(null,"Qr inconnu");
+                         }
+
 
                      }
                  }
@@ -87,5 +92,10 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
         Thread t =  new Thread(r,"My Thread");
         t.setDaemon(true);
         return t;
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        pane.setLayout(null);
     }
 }

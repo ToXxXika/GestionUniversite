@@ -12,6 +12,7 @@ public interface UtilisateurInterface {
      boolean EtudiantSign(Etudiants E);
      boolean EnseignantSign(Enseignants E);
      boolean verifEtudiant(String cin);
+     String getEtudiantByRole(String mail);
 
 
 }

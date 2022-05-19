@@ -2,8 +2,7 @@ import Controllers.UserController;
 import Database.DbConnection;
 import Models.Personne;
 import Views.QR;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLightLaf;
+
 import com.github.sarxos.webcam.Webcam;
 import javafx.stage.Stage;
 import org.bytedeco.javacv.*;
