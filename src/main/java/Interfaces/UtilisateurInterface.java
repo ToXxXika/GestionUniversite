@@ -5,6 +5,7 @@ import Models.Etudiants;
 import Models.Personne;
 
 import java.io.File;
+import java.util.List;
 
 public interface UtilisateurInterface {
      boolean Login(String user,String password);
@@ -13,6 +14,10 @@ public interface UtilisateurInterface {
      boolean EnseignantSign(Enseignants E);
      boolean verifEtudiant(String cin);
      String getEtudiantByRole(String mail);
+     List<Personne> getAllPersonne();
+     boolean DeleteEtudiant(String cin);
+     boolean  DeleteEnseignant(String Cin);
+     boolean DeletePersonne(String Cin);
 
 
 }

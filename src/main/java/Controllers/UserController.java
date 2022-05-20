@@ -34,7 +34,9 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Properties;
 
 public class UserController extends DbConnection implements UtilisateurInterface {
@@ -247,7 +249,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
                 MimeMessage message = new MimeMessage(session);
             Multipart multipart = new MimeMultipart();
             MimeBodyPart messageBodyPart = new MimeBodyPart();
-            //messageBodyPart.setContent("<h1>Bienvenue sur notre site</h1><br><br>Votre Mail est :"+mail+" Votre mot de passe est : "+Password+"<br><br>Vous pouvez vous connecter avec ce mot de passe et changer votre mot de passe dans votre profil", "text/html");
+            messageBodyPart.setContent("<h1>Bienvenue sur notre site</h1><br><br>Votre Mail est :"+mail+" Votre mot de passe est : "+Password+"<br><br>Vous pouvez vous connecter avec ce mot de passe et changer votre mot de passe dans votre profil", "text/html");
             messageBodyPart.attachFile(file);
             multipart.addBodyPart(messageBodyPart);
             message.setContent(multipart);
@@ -292,6 +294,92 @@ public class UserController extends DbConnection implements UtilisateurInterface
             }
         }catch (Exception Ex){
             System.out.println(Ex.getMessage());
+        }
+        return Res;
+    }
+
+    @Override
+    public List<Personne> getAllPersonne() {
+        ArrayList<Personne> Res = new ArrayList<>();
+        String Sql = "Select * from personne";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(Sql);
+            ResultSet Rs = Ps.executeQuery();
+            while (Rs.next()) {
+                Personne P = new Personne();
+                P.setCin(Rs.getString("cin"));
+                P.setNom(Rs.getString("nom"));
+                P.setPrenom(Rs.getString("prenom"));
+                P.setMail(Rs.getString("mail"));
+                P.setRole(Rs.getString("role"));
+                Res.add(P);
+            }
+        }catch (Exception Ex){
+            System.out.println(Ex.getMessage());
+
+        }
+        return Res;
+
+    }
+
+    @Override
+    public boolean DeleteEtudiant(String cin) {
+        String sql = "Delete from etudiant where cin = ?";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(sql);
+            Ps.setString(1, cin);
+            int Res = Ps.executeUpdate();
+            if (Res > 0) {
+                return true;
+
+            }
+
+        }catch (Exception Ex){
+            System.out.println(Ex.getMessage());
+        }
+        return false;
+    }
+
+    @Override
+    public boolean DeleteEnseignant(String Cin) {
+        String sql ="Delete from enseignant where cin = ?";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(sql);
+            Ps.setString(1, Cin);
+            int Res = Ps.executeUpdate();
+            if (Res > 0) {
+                return true;
+
+            }
+        } catch (Exception Ex){
+            System.out.println(Ex.getMessage());
+
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean DeletePersonne(String Cin) {
+        boolean Res = false ;
+        System.out.println("in function DeletePersonne");
+        if(DeleteEtudiant(Cin)) {
+            System.out.println("Deleted from Etudiant");
+            String Sql = "Delete from personne where cin = ?";
+            try {
+                PreparedStatement Ps = Con.prepareStatement(Sql);
+                Ps.setString(1, Cin);
+                int i = Ps.executeUpdate();
+                if (i > 0) {
+                    System.out.println("Deleted from Personne");
+                    Res = true;
+                }
+            } catch (Exception Ex) {
+                System.out.println(Ex.getMessage());
+            }
+        }else{
+            System.out.println("Erreur dans la suppression de l'etudiant ");
+            Res= false;
         }
         return Res;
     }
