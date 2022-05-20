@@ -163,7 +163,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
             String qrCodeText = NomPrenom;
             System.out.println(qrCodeText);
             String filePath = nameProd + ".jpg";
-            int size = 125;
+            int size = 250;
             String fileType = "jpg";
             File qrFile = new File(filePath);
             createQrImage(qrFile, qrCodeText, size, fileType, mail,Password);
