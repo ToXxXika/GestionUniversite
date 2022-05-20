@@ -4,29 +4,17 @@
  */
 package Views;
 
-import Controllers.UserController;
-import Models.Etudiants;
-import Models.Personne;
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author mabro
  */
-public class Admin extends javax.swing.JFrame {
-  public DefaultTableModel model ;
+public class Notes extends javax.swing.JFrame {
+
     /**
-     * Creates new form Admin
+     * Creates new form Notes
      */
-    public Admin() {
+    public Notes() {
         initComponents();
-        LoadJtable();
     }
 
     /**
@@ -52,29 +40,25 @@ public class Admin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         EtudiantsPane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableEtd = new javax.swing.JTable();
+        jTableNote = new javax.swing.JTable();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
-        CinTxt = new javax.swing.JTextField();
+        MatiereTxt = new javax.swing.JTextField();
         NomTxt = new javax.swing.JTextField();
         PrenomTxt = new javax.swing.JTextField();
-        MailTxt = new javax.swing.JTextField();
-        NumInscTxt = new javax.swing.JTextField();
-        PasswordTxt = new javax.swing.JPasswordField();
+        TypeNoteTxt = new javax.swing.JTextField();
+        NoteTxt = new javax.swing.JTextField();
         SuppBtn = new javax.swing.JButton();
         AjouterBtn1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        NumInscTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(23, 35, 51));
 
@@ -162,10 +146,6 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(23, 35, 51));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\mabro\\IdeaProjects\\SwingInspire\\src\\swing\\images\\icons8_Contacts_25px.png")); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\mabro\\IdeaProjects\\SwingInspire\\src\\swing\\images\\icons8_Secured_Letter_25px_2.png")); // NOI18N
-
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 52)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("02");
@@ -206,28 +186,25 @@ public class Admin extends javax.swing.JFrame {
 
         EtudiantsPane.setBackground(new java.awt.Color(23, 35, 51));
 
-        jTableEtd.setBackground(new java.awt.Color(23, 35, 51));
-        jTableEtd.setForeground(new java.awt.Color(255, 255, 255));
-        jTableEtd.setModel(new javax.swing.table.DefaultTableModel(
+        jTableNote.setBackground(new java.awt.Color(23, 35, 51));
+        jTableNote.setForeground(new java.awt.Color(255, 255, 255));
+        jTableNote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cin", "NumInsc", "Nom", "Prenom", "Mail"
+                "Nom", "Prenom", "Matiere", "Type", "Note"
             }
         ));
-        jScrollPane1.setViewportView(jTableEtd);
-        if (jTableEtd.getColumnModel().getColumnCount() > 0) {
+        jScrollPane1.setViewportView(jTableNote);
 
-        }
-
-        CinTxt.setBackground(new java.awt.Color(23, 35, 51));
-        CinTxt.setForeground(new java.awt.Color(255, 255, 255));
-        CinTxt.setText("Cin");
-        CinTxt.setBorder(null);
-        CinTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+        MatiereTxt.setBackground(new java.awt.Color(23, 35, 51));
+        MatiereTxt.setForeground(new java.awt.Color(255, 255, 255));
+        MatiereTxt.setText("Matiere");
+        MatiereTxt.setBorder(null);
+        MatiereTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                CinTxtMouseClicked(evt);
+                MatiereTxtMouseClicked(evt);
             }
         });
 
@@ -251,43 +228,32 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        MailTxt.setBackground(new java.awt.Color(23, 35, 51));
-        MailTxt.setForeground(new java.awt.Color(255, 255, 255));
-        MailTxt.setText("Email");
-        MailTxt.setBorder(null);
-        MailTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+        TypeNoteTxt.setBackground(new java.awt.Color(23, 35, 51));
+        TypeNoteTxt.setForeground(new java.awt.Color(255, 255, 255));
+        TypeNoteTxt.setText("Type");
+        TypeNoteTxt.setBorder(null);
+        TypeNoteTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MailTxtMouseClicked(evt);
+                TypeNoteTxtMouseClicked(evt);
             }
         });
 
-        NumInscTxt.setBackground(new java.awt.Color(23, 35, 51));
-        NumInscTxt.setForeground(new java.awt.Color(255, 255, 255));
-        NumInscTxt.setText("NumInsc");
-        NumInscTxt.setBorder(null);
-        NumInscTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+        NoteTxt.setBackground(new java.awt.Color(23, 35, 51));
+        NoteTxt.setForeground(new java.awt.Color(255, 255, 255));
+        NoteTxt.setText("Note");
+        NoteTxt.setBorder(null);
+        NoteTxt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NumInscTxtMouseClicked(evt);
-            }
-        });
-
-        PasswordTxt.setBackground(new java.awt.Color(23, 35, 51));
-        PasswordTxt.setForeground(new java.awt.Color(255, 255, 255));
-        PasswordTxt.setText("jPasswordField1");
-        PasswordTxt.setBorder(null);
-        PasswordTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PasswordTxtMouseClicked(evt);
+                NoteTxtMouseClicked(evt);
             }
         });
 
         SuppBtn.setBackground(new java.awt.Color(23, 35, 51));
         SuppBtn.setForeground(new java.awt.Color(255, 255, 255));
         SuppBtn.setText("Supprimer");
-
         SuppBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                BtnClickedSupp(evt);
+                SuppBtnBtnClickedSupp(evt);
             }
         });
 
@@ -313,32 +279,38 @@ public class Admin extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        NumInscTxt.setBackground(new java.awt.Color(23, 35, 51));
+        NumInscTxt.setForeground(new java.awt.Color(255, 255, 255));
+        NumInscTxt.setText("NumInsc");
+        NumInscTxt.setBorder(null);
+        NumInscTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NumInscTxtMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout EtudiantsPaneLayout = new javax.swing.GroupLayout(EtudiantsPane);
         EtudiantsPane.setLayout(EtudiantsPaneLayout);
         EtudiantsPaneLayout.setHorizontalGroup(
             EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
+                .addGap(0, 442, Short.MAX_VALUE)
+                .addComponent(SuppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(312, 312, 312))
             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                 .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(PasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                         .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                                 .addGap(38, 38, 38)
                                 .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jSeparator7)
                                     .addComponent(jSeparator6)
                                     .addComponent(jSeparator2)
                                     .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                                     .addComponent(jSeparator4)
                                     .addComponent(jSeparator5)))
-                            .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                                .addGap(63, 63, 63)
-                                .addComponent(CinTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addComponent(NomTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -347,16 +319,28 @@ public class Admin extends javax.swing.JFrame {
                                 .addComponent(PrenomTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                                 .addGap(60, 60, 60)
-                                .addComponent(MailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(TypeNoteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(MatiereTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(65, 65, 65)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
-                .addGap(0, 412, Short.MAX_VALUE)
-                .addComponent(SuppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(312, 312, 312))
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(NoteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
+                        .addGap(21, 21, 21))
+                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                     .addGap(90, 90, 90)
@@ -366,15 +350,23 @@ public class Admin extends javax.swing.JFrame {
         EtudiantsPaneLayout.setVerticalGroup(
             EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61)
+                        .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                                .addComponent(CinTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                                .addComponent(MatiereTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
@@ -386,18 +378,14 @@ public class Admin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(43, 43, 43)
-                                .addComponent(MailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(TypeNoteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, 0)
-                .addComponent(PasswordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(33, 33, 33)
+                        .addComponent(NoteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(SuppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
             .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,23 +421,19 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnClickedSupp(java.awt.event.MouseEvent evt){
-            System.out.println(jTableEtd.rowAtPoint(evt.getPoint()));
-            if(jTableEtd.rowAtPoint(evt.getPoint()) != -1){
-                UserController uc = new UserController();
-                if(uc.DeletePersonne(jTableEtd.getValueAt(jTableEtd.rowAtPoint(evt.getPoint()), 0).toString())){
-                    JOptionPane.showMessageDialog(null, "Suppression effectuée avec succès");
-                    model.removeRow(jTableEtd.rowAtPoint(evt.getPoint()));
-                    LoadJtable();
-                }else JOptionPane.showMessageDialog(null, "Suppression échouée");
+    private void SideBtnEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SideBtnEnsMouseClicked
 
+        System.out.println("Clicked");
+        Dashboard D = new Dashboard();
+        D.pack();
+        D.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SideBtnEnsMouseClicked
 
-            }
-    }
-    private void CinTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CinTxtMouseClicked
+    private void MatiereTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatiereTxtMouseClicked
         // TODO add your handling code here:
-        CinTxt.setText("");
-    }//GEN-LAST:event_CinTxtMouseClicked
+        MatiereTxt.setText("");
+    }//GEN-LAST:event_MatiereTxtMouseClicked
 
     private void NomTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NomTxtMouseClicked
         // TODO add your handling code here:
@@ -458,83 +442,32 @@ public class Admin extends javax.swing.JFrame {
 
     private void PrenomTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrenomTxtMouseClicked
         // TODO add your handling code here:
-         PrenomTxt.setText("");
+        PrenomTxt.setText("");
     }//GEN-LAST:event_PrenomTxtMouseClicked
 
-    private void MailTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MailTxtMouseClicked
+    private void TypeNoteTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TypeNoteTxtMouseClicked
         // TODO add your handling code here:
-        MailTxt.setText("");
-    }//GEN-LAST:event_MailTxtMouseClicked
+        TypeNoteTxt.setText("");
+    }//GEN-LAST:event_TypeNoteTxtMouseClicked
 
-    private void PasswordTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordTxtMouseClicked
+    private void NoteTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoteTxtMouseClicked
         // TODO add your handling code here:
-        PasswordTxt.setText("");
-    }//GEN-LAST:event_PasswordTxtMouseClicked
+        NoteTxt.setText("");
+    }//GEN-LAST:event_NoteTxtMouseClicked
 
-    private void NumInscTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NumInscTxtMouseClicked
+    private void SuppBtnBtnClickedSupp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SuppBtnBtnClickedSupp
         // TODO add your handling code here:
-        NumInscTxt.setText("");
-    }//GEN-LAST:event_NumInscTxtMouseClicked
-
-    public void  LoadJtable(){
-        jTableEtd.clearSelection();
-        UserController userController = new UserController();
-        List<Personne> personnes = new ArrayList<>();
-        personnes =userController.getAllPersonne();
-         model = (DefaultTableModel) jTableEtd.getModel();
-        Object rowData[] = new Object[20];
-        for(int i =0;i<personnes.size();i++){
-            rowData[0] = personnes.get(i).getCin();
-            rowData[2] = personnes.get(i).getNom();
-            rowData[3] = personnes.get(i).getPrenom();
-            rowData[4] = personnes.get(i).getMail();
-            System.out.println("Hello");
-            model.addRow(rowData);
-        }
-        
-    }
+    }//GEN-LAST:event_SuppBtnBtnClickedSupp
 
     private void AjouterBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterBtn1ActionPerformed
         // TODO add your handling code here:
-                 Personne personne = new Personne();
-        UserController userController = new UserController();
-        personne.setCin(CinTxt.getText());
-        personne.setNom(NomTxt.getText());
-        personne.setPrenom(PrenomTxt.getText());
-        personne.setMail(MailTxt.getText());
-        personne.setPassword(PasswordTxt.getText());
-
-        personne.setRole("Etudiant");
-        if(userController.SignIn(personne,Integer.parseInt(NumInscTxt.getText()),0)){
-
-            JOptionPane.showMessageDialog(null, "Etudiant ajouté avec succès");
-            CinTxt.setText("Cin");
-            MailTxt.setText("Email");
-            PasswordTxt.setText("*****");
-            NomTxt.setText("Nom");
-            PrenomTxt.setText("Prenom");
-            NumInscTxt.setText("NumInsc");
-            LoadJtable();
-        }else {
-            JOptionPane.showMessageDialog(null, "Etudiant non ajouté");
-        }
+        //TODO : add note to the database
     }//GEN-LAST:event_AjouterBtn1ActionPerformed
 
-    private void SideBtnEnsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SideBtnEnsMouseClicked
-     
-               System.out.println("Clicked");
-               Dashboard D = new Dashboard();
-               D.pack();
-               D.setVisible(true);
-               this.dispose();
-    }//GEN-LAST:event_SideBtnEnsMouseClicked
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+    private void NumInscTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NumInscTxtMouseClicked
         // TODO add your handling code here:
-       
-    }//GEN-LAST:event_formWindowOpened
-  
-  
+    }//GEN-LAST:event_NumInscTxtMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -552,39 +485,35 @@ public class Admin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Notes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Notes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Notes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Notes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-
-                new Admin().setVisible(true);
-                
-
+                new Notes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjouterBtn1;
-    private javax.swing.JTextField CinTxt;
     private javax.swing.JPanel EtudiantsPane;
-    private javax.swing.JTextField MailTxt;
+    private javax.swing.JTextField MatiereTxt;
     private javax.swing.JTextField NomTxt;
+    private javax.swing.JTextField NoteTxt;
     private javax.swing.JTextField NumInscTxt;
-    private javax.swing.JPasswordField PasswordTxt;
     private javax.swing.JTextField PrenomTxt;
     private javax.swing.JButton SideBtnEns;
     private javax.swing.JButton SuppBtn;
+    private javax.swing.JTextField TypeNoteTxt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
@@ -604,6 +533,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JTable jTableEtd;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JTable jTableNote;
     // End of variables declaration//GEN-END:variables
 }

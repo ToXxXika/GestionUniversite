@@ -74,7 +74,11 @@ public class QR extends javax.swing.JFrame implements Runnable, ThreadFactory {
                          UserController uc = new UserController();
                          if(uc.Login(Mail,Password)){
                              frame.setVisible(false);
-                             JOptionPane.showMessageDialog(null,"Bienvenue");
+                             Dashboard d = new Dashboard();
+                             //TODO: fix login shit here
+
+                             d.setVisible(true);
+
                              Res=false;
                          }else{
                              JOptionPane.showMessageDialog(null,"Qr inconnu");
