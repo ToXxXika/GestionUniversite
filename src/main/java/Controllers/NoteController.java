@@ -83,19 +83,46 @@ public class NoteController extends DbConnection implements NoteInterface {
 
     @Override
     public float getMoyenne(String codeE, String Matiere) {
+        System.out.println("getMoyenne");
         float Res = 0;
-        String Sql = "Select AVG(note) from notes where matiere = ? and nom = ?";
+        String Sql = "Select AVG(note) from notes where matiere = ? and cinE = ?";
+        System.out.println(Sql);
         try {
             PreparedStatement Ps = Con.prepareStatement(Sql);
             Ps.setString(1, Matiere);
             Ps.setString(2, codeE);
             ResultSet Rs  = Ps.executeQuery();
             if (Rs.next()) {
+                System.out.println("RS valid");
+                System.out.println(Res);
                 Res = Rs.getFloat(1);
             }
         } catch (SQLException E) {
             System.out.println(E.getMessage());
         }
         return Res;
+    }
+
+    @Override
+    public boolean SaveMoyenne(int NumInsc, String Nom, String Prenom, String Matiere, float Moyenne) {
+        boolean Res = false;
+        String Sql = "Insert into moyennelog(NumInsc,Nom,Prenom,Matiere,Moyenne) values (?,?,?,?,?)";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(Sql);
+            Ps.setInt(1, NumInsc);
+            Ps.setString(2, Nom);
+            Ps.setString(3, Prenom);
+            Ps.setString(4, Matiere);
+            Ps.setFloat(5, Moyenne);
+            int i = Ps.executeUpdate();
+            if (i > 0) {
+                System.out.println("Moyenne saved");
+                Res = true;
+            }
+        } catch (SQLException E) {
+            System.out.println(E.getMessage());
+        }
+        return Res;
+
     }
 }

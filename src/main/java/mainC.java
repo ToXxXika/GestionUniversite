@@ -28,10 +28,11 @@ public class mainC {
         opencv_imgcodecs.cvSaveImage("selfie.jpg", img);
         CanvasFrame canvasFrame = new CanvasFrame("Webcam");
         canvasFrame.showImage(frame);*/
-        UserController Uc = new UserController();
+    /*    UserController Uc = new UserController();
         Personne P = new Personne("07220650","Mohamed","Bouhlel","ikasou.666@gmail.com","123456","Etudiant");
         Uc.SignIn(P,125,125);
         QR qr = new QR();
-        qr.initWebcam();
+        qr.initWebcam();*/
+
      }
 }

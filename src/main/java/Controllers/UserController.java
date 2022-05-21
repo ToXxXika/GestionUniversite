@@ -11,15 +11,6 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
-import javafx.stage.Stage;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.videoio.VideoCapture;
 
 import javax.imageio.ImageIO;
 import javax.mail.*;
@@ -29,8 +20,6 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -382,6 +371,40 @@ public class UserController extends DbConnection implements UtilisateurInterface
             Res= false;
         }
         return Res;
+    }
+
+    @Override
+    public Personne VerifEtudiant(int NumInsc) {
+        System.out.println("in function VerifEtudiant");
+        String Sql = "Select * from etudiant where numinsc = ?";
+        try {
+            PreparedStatement Ps = Con.prepareStatement(Sql);
+            Ps.setInt(1, NumInsc);
+            ResultSet Rs = Ps.executeQuery();
+            if (Rs.next()) {
+                System.out.println("Etudiant existe");
+               String sql2="Select * from personne where cin = ?";
+                try {
+                    PreparedStatement Ps2 = Con.prepareStatement(sql2);
+                    Ps2.setString(1, Rs.getString("cin"));
+                    ResultSet Rs2 = Ps2.executeQuery();
+                    if (Rs2.next()) {
+                        System.out.println("Personne existe");
+                        System.out.println("RS2 : " + Rs2.getString("cin"));
+                        Personne P = new Personne();
+                        P.setCin(Rs2.getString("cin"));
+                        P.setNom(Rs2.getString("nom"));
+                        P.setPrenom(Rs2.getString("prenom"));
+                        return P;
+                    }
+                } catch (Exception Ex) {
+                    System.out.println(Ex.getMessage());
+                }
+            }
+        }catch (Exception Ex){
+            System.out.println(Ex.getMessage());
+        }
+        return null;
     }
 }
 

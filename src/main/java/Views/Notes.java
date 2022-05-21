@@ -4,11 +4,27 @@
  */
 package Views;
 
+import Controllers.NoteController;
+import Controllers.UserController;
+import Models.Etudiants;
+import Models.Personne;
+import com.opencsv.CSVWriter;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author mabro
  */
 public class Notes extends javax.swing.JFrame {
+
+    public File csvFile = new File("src/main/java/notes.csv");
+    String[] header={"NumInsc","Nom","Prenom","Note"};
 
     /**
      * Creates new form Notes
@@ -57,6 +73,11 @@ public class Notes extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         NumInscTxt = new javax.swing.JTextField();
+        jSeparator9 = new javax.swing.JSeparator();
+        MatiereTxt2 = new javax.swing.JTextField();
+        jSeparator10 = new javax.swing.JSeparator();
+        NoteTxt2 = new javax.swing.JTextField();
+        CalculNoteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -291,6 +312,40 @@ public class Notes extends javax.swing.JFrame {
             }
         });
 
+        MatiereTxt2.setBackground(new java.awt.Color(23, 35, 51));
+        MatiereTxt2.setForeground(new java.awt.Color(255, 255, 255));
+        MatiereTxt2.setText("Matiere");
+        MatiereTxt2.setBorder(null);
+        MatiereTxt2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MatiereTxt2MouseClicked(evt);
+            }
+        });
+
+        NoteTxt2.setBackground(new java.awt.Color(23, 35, 51));
+        NoteTxt2.setForeground(new java.awt.Color(255, 255, 255));
+        NoteTxt2.setText("Note");
+        NoteTxt2.setBorder(null);
+        NoteTxt2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NoteTxt2MouseClicked(evt);
+            }
+        });
+
+        CalculNoteBtn.setBackground(new java.awt.Color(23, 35, 51));
+        CalculNoteBtn.setForeground(new java.awt.Color(255, 255, 255));
+        CalculNoteBtn.setText("Calculer");
+        CalculNoteBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CalculNoteBtnBtnClickedSupp(evt);
+            }
+        });
+        CalculNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CalculNoteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout EtudiantsPaneLayout = new javax.swing.GroupLayout(EtudiantsPane);
         EtudiantsPane.setLayout(EtudiantsPaneLayout);
         EtudiantsPaneLayout.setHorizontalGroup(
@@ -335,11 +390,18 @@ public class Notes extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                         .addGap(21, 21, 21))
                     .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(EtudiantsPaneLayout.createSequentialGroup()
                         .addGap(66, 66, 66)
-                        .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jSeparator10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                                .addComponent(jSeparator8, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(NoteTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(73, 73, 73)
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MatiereTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CalculNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(EtudiantsPaneLayout.createSequentialGroup()
@@ -350,13 +412,24 @@ public class Notes extends javax.swing.JFrame {
         EtudiantsPaneLayout.setVerticalGroup(
             EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(EtudiantsPaneLayout.createSequentialGroup()
-                .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61)
-                        .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addGap(90, 90, 90)
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NumInscTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MatiereTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(EtudiantsPaneLayout.createSequentialGroup()
+                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(NoteTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CalculNoteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
@@ -468,6 +541,53 @@ public class Notes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NumInscTxtMouseClicked
 
+    private void MatiereTxt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatiereTxt2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MatiereTxt2MouseClicked
+
+    private void NoteTxt2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NoteTxt2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NoteTxt2MouseClicked
+
+    private void CalculNoteBtnBtnClickedSupp(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalculNoteBtnBtnClickedSupp
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CalculNoteBtnBtnClickedSupp
+
+    private void CalculNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculNoteBtnActionPerformed
+        NoteController nc = new NoteController();
+
+
+        try {
+            FileWriter outputfile = new FileWriter(csvFile.getAbsoluteFile(), true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            writer.writeNext(header);
+
+            UserController uc = new UserController();
+            Personne rs = new Personne();
+             rs = uc.VerifEtudiant(Integer.parseInt(NumInscTxt.getText()));
+             if(rs==null){
+                 System.out.println("Etudiant introuvable");
+             }  else {
+
+                 System.out.println("CIN DE CET ETUDIANT " +rs.getCin() );
+                 float Moyenne = nc.getMoyenne(rs.getCin(), MatiereTxt2.getText());
+                 NoteTxt2.setText(Moyenne + "");
+                 String[] data = {NumInscTxt.getText(), rs.getNom(), rs.getPrenom(), MatiereTxt2.getText(), NoteTxt2.getText()};
+                 writer.writeNext(data);
+                 if (nc.SaveMoyenne(Integer.parseInt(NumInscTxt.getText()), rs.getNom(), rs.getPrenom(), MatiereTxt2.getText(), Float.parseFloat(NoteTxt2.getText()))) {
+                     JOptionPane.showMessageDialog(null, "Moyenne enregistrée avec succès");
+                 }
+             }
+
+            writer.close();
+
+        }catch (Exception E){
+            System.out.println(E);
+        }
+
+
+    }//GEN-LAST:event_CalculNoteBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -505,10 +625,13 @@ public class Notes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjouterBtn1;
+    private javax.swing.JButton CalculNoteBtn;
     private javax.swing.JPanel EtudiantsPane;
     private javax.swing.JTextField MatiereTxt;
+    private javax.swing.JTextField MatiereTxt2;
     private javax.swing.JTextField NomTxt;
     private javax.swing.JTextField NoteTxt;
+    private javax.swing.JTextField NoteTxt2;
     private javax.swing.JTextField NumInscTxt;
     private javax.swing.JTextField PrenomTxt;
     private javax.swing.JButton SideBtnEns;
@@ -527,6 +650,7 @@ public class Notes extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -534,6 +658,7 @@ public class Notes extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTable jTableNote;
     // End of variables declaration//GEN-END:variables
 }

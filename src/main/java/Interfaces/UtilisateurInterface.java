@@ -4,7 +4,7 @@ import Models.Enseignants;
 import Models.Etudiants;
 import Models.Personne;
 
-import java.io.File;
+import java.sql.ResultSet;
 import java.util.List;
 
 public interface UtilisateurInterface {
@@ -18,6 +18,9 @@ public interface UtilisateurInterface {
      boolean DeleteEtudiant(String cin);
      boolean  DeleteEnseignant(String Cin);
      boolean DeletePersonne(String Cin);
+     Personne VerifEtudiant(int NumInsc);
+
+
 
 
 }

@@ -10,4 +10,6 @@ public interface NoteInterface {
     //declare a function named ModifyNote without developing it
     boolean ModifyNote(Notes N,Matiere M ,String Nom, String Prenom);
     float getMoyenne(String codeE,String Matiere);
+    boolean SaveMoyenne(int NumInsc,String Nom,String Prenom,String Matiere,float Moyenne);
+
 }
