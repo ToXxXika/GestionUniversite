@@ -1,16 +1,33 @@
 package Models;
 
 public class Matiere {
+    int id ;
     String Nom ;
-    String Code ;
+
     float Coefficient ; // coefficient de la matiere
 
     //main constructor
-    public Matiere(float Coefficient ,String nom, String code) {
+    public Matiere(String nom, float Coefficient ) {
         Nom = nom;
-        Code = code;
+
         this.Coefficient = Coefficient;
     }
+    //constructor with id
+    public Matiere(int id ,String nom, float Coefficient ) {
+        this.id = id;
+        Nom = nom;
+
+        this.Coefficient = Coefficient;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public float getCoefficient() {
+        return Coefficient;
+    }
+
     //empty constructor
     public Matiere() {
     }
@@ -19,11 +36,6 @@ public class Matiere {
         return Nom;
     }
     // getter and setter of Code
-    public String getCode() {
-        return Code;
-    }
-    public void setCode(String code) {
-        Code = code;
-    }
+
 
 }

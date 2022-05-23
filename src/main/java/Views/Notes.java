@@ -532,9 +532,27 @@ public class Notes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SuppBtnBtnClickedSupp
 
+    void cleanText(){
+        MatiereTxt.setText("");
+        NomTxt.setText("");
+        PrenomTxt.setText("");
+        TypeNoteTxt.setText("");
+        NoteTxt.setText("");
+    }
     private void AjouterBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjouterBtn1ActionPerformed
         // TODO add your handling code here:
-        //TODO : add note to the database
+        NoteController NC = new NoteController();
+         String Matiere = MatiereTxt.getText();
+         String type = TypeNoteTxt.getText();
+         float Note = Float.parseFloat(NoteTxt.getText());
+         String Nom = NomTxt.getText();
+         String Prenom = PrenomTxt.getText();
+         if(NC.AjouterNote(Note, Matiere,type, Nom, Prenom)){
+             JOptionPane.showMessageDialog(null, "Note Ajoutée");
+             cleanText();
+         }else {
+             JOptionPane.showMessageDialog(null, "Note non Ajoutée");
+         }
     }//GEN-LAST:event_AjouterBtn1ActionPerformed
 
     private void NumInscTxtMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NumInscTxtMouseClicked

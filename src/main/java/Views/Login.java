@@ -7,6 +7,12 @@ package Views;
 import Controllers.UserController;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  *
@@ -14,6 +20,7 @@ import javax.swing.*;
  */
 public class Login extends javax.swing.JFrame {
 
+    public Path path = Paths.get("/logfile.txt");
     /**
      * Creates new form Login
      */
@@ -124,15 +131,53 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    boolean fileSave(String mail){
+        File path = new File("./logfile.txt");
+        try{
+            FileWriter fw = new FileWriter(path,true);
+            fw.write(mail+"\n");
+            fw.flush();
+            fw.close();
+            System.out.println("File saved");
+            return true;
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("File not saved");
+        }
+        return false;
+    }
     private void ConnecterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnecterActionPerformed
 
         UserController userController = new UserController();
-        if(userController.Login(MailTxt.getText(), motdepasseTxt.getPassword().toString())){
+        if(userController.Login(MailTxt.getText(), motdepasseTxt.getText())){
             JOptionPane.showMessageDialog(null, "Bienvenue");
-            switch (userController.getEtudiantByRole(MailTxt.getText())){
+            switch (userController.getPersonneByRole(MailTxt.getText())){
 
                 case "Etudiant":
+                    //TODO : Implementer la fenetre de l'etudiant
+                    EtudiantFrame etudiantFrame = new EtudiantFrame();
+                    if(fileSave(MailTxt.getText())){
+                        etudiantFrame.pack();
+                        etudiantFrame.setVisible(true);
+                        this.dispose();
+                        break;
+                    }
+                case "Enseignant":
+                    //TODO : Implementer la fenetre d'enseignant
+                    EnseignantFrame enseignantFrame = new EnseignantFrame();
+                    enseignantFrame.pack();
+                    enseignantFrame.setVisible(true);
+                    this.dispose();
 
+                    break;
+                case "Admin":
+                    //TODO : Implementer la fenetre de l'admin
+                    Admin admin = new Admin();
+                    admin.pack();
+                    admin.setVisible(true);
+                    this.dispose();
+                default: JOptionPane.showMessageDialog(null, "Erreur");
 
             }
 

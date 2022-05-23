@@ -59,6 +59,8 @@ public class UserController extends DbConnection implements UtilisateurInterface
                              System.out.println(MailStore.getName());
                              System.out.println(PrenomStore.getName());
                              System.out.println(NomStore.getName());
+                             //TODO : Router by using Role
+
                          }
                      }catch (SQLException S){
                          System.out.println(S.getMessage());
@@ -271,7 +273,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
     }
 
     @Override
-    public String getEtudiantByRole(String mail) {
+    public String getPersonneByRole(String mail) {
         String Res = "";
         String Sql = "Select * from personne where mail = ?";
         try {

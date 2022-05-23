@@ -2,32 +2,43 @@ package Models;
 
 public class Notes {
 
-    Matiere Matiere ;
-    int Note ;
+    String Matiere ;
+    float Note ;
     String type ;
     String codeEtudiant ;
 
 
+    public String getCodeEtudiant() {
+        return codeEtudiant;
+    }
 
-    public Notes(Models.Matiere matiere, int note, String type) {
+    public void setCodeEtudiant(String codeEtudiant) {
+        this.codeEtudiant = codeEtudiant;
+    }
+
+    public Notes(String matiere, int note, String type) {
         Matiere = matiere;
         Note = note;
         this.type = type;
     }
 
-    public Models.Matiere getMatiere() {
+    public Notes() {
+
+    }
+
+    public String getMatiere() {
         return Matiere;
     }
 
-    public void setMatiere(Models.Matiere matiere) {
+    public void setMatiere(String matiere) {
         Matiere = matiere;
     }
 
-    public int getNote() {
+    public float getNote() {
         return Note;
     }
 
-    public void setNote(int note) {
+    public void setNote(float note) {
         Note = note;
     }
 

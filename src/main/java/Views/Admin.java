@@ -27,6 +27,8 @@ public class Admin extends javax.swing.JFrame {
     public Admin() {
         initComponents();
         LoadJtable();
+        EtudiantsPane.setVisible(false);
+
     }
 
     /**
@@ -40,9 +42,9 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         SideBtnEns = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        StatBtn = new javax.swing.JButton();
+        EtdBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -70,6 +72,7 @@ public class Admin extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(23, 35, 51));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -85,13 +88,6 @@ public class Admin extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
 
-        jButton2.setBackground(new java.awt.Color(23, 35, 51));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Etudiants");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-
         SideBtnEns.setBackground(new java.awt.Color(23, 35, 51));
         SideBtnEns.setForeground(new java.awt.Color(255, 255, 255));
         SideBtnEns.setText("Enseignants");
@@ -104,37 +100,52 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(23, 35, 51));
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Statistiques");
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
+        StatBtn.setBackground(new java.awt.Color(23, 35, 51));
+        StatBtn.setForeground(new java.awt.Color(255, 255, 255));
+        StatBtn.setText("Statistiques");
+        StatBtn.setBorder(null);
+        StatBtn.setBorderPainted(false);
+        StatBtn.setContentAreaFilled(false);
+        StatBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                StatBtnMouseClicked(evt);
+            }
+        });
+
+        EtdBtn.setBackground(new java.awt.Color(23, 35, 51));
+        EtdBtn.setForeground(new java.awt.Color(255, 255, 255));
+        EtdBtn.setText("Etudiants");
+        EtdBtn.setBorder(null);
+        EtdBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EtdBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(EtdBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(StatBtn)
                     .addComponent(SideBtnEns)
-                    .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(jButton1)
-                .addGap(48, 48, 48)
-                .addComponent(jButton2)
-                .addGap(39, 39, 39)
+                .addGap(70, 70, 70)
                 .addComponent(SideBtnEns)
-                .addGap(44, 44, 44)
-                .addComponent(jButton4)
+                .addGap(77, 77, 77)
+                .addComponent(StatBtn)
+                .addGap(82, 82, 82)
+                .addComponent(EtdBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -161,10 +172,6 @@ public class Admin extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(23, 35, 51));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\mabro\\IdeaProjects\\SwingInspire\\src\\swing\\images\\icons8_Contacts_25px.png")); // NOI18N
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\mabro\\IdeaProjects\\SwingInspire\\src\\swing\\images\\icons8_Secured_Letter_25px_2.png")); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 52)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -218,7 +225,11 @@ public class Admin extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableEtd);
         if (jTableEtd.getColumnModel().getColumnCount() > 0) {
-
+           /* jTableEtd.getColumnModel().getColumn(0).setHeaderValue(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.jTableEtd.columnModel.title4")); // NOI18N
+            jTableEtd.getColumnModel().getColumn(1).setHeaderValue(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.jTableEtd.columnModel.title3")); // NOI18N
+            jTableEtd.getColumnModel().getColumn(2).setHeaderValue(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.jTableEtd.columnModel.title0")); // NOI18N
+            jTableEtd.getColumnModel().getColumn(3).setHeaderValue(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.jTableEtd.columnModel.title1")); // NOI18N
+            jTableEtd.getColumnModel().getColumn(4).setHeaderValue(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.jTableEtd.columnModel.title2")); // NOI18N */
         }
 
         CinTxt.setBackground(new java.awt.Color(23, 35, 51));
@@ -284,7 +295,7 @@ public class Admin extends javax.swing.JFrame {
         SuppBtn.setBackground(new java.awt.Color(23, 35, 51));
         SuppBtn.setForeground(new java.awt.Color(255, 255, 255));
         SuppBtn.setText("Supprimer");
-
+      //  SuppBtn.setToolTipText(org.openide.util.NbBundle.getMessage(Admin.class, "Admin.SuppBtn.toolTipText")); // NOI18N
         SuppBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BtnClickedSupp(evt);
@@ -351,10 +362,10 @@ public class Admin extends javax.swing.JFrame {
                         .addGap(65, 65, 65)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EtudiantsPaneLayout.createSequentialGroup()
-                .addGap(0, 412, Short.MAX_VALUE)
+                .addGap(0, 417, Short.MAX_VALUE)
                 .addComponent(SuppBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(312, 312, 312))
             .addGroup(EtudiantsPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -533,6 +544,19 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_formWindowOpened
+
+    private void StatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StatBtnMouseClicked
+        StatistiquesFrame S = new StatistiquesFrame();
+        S.pack();
+        S.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_StatBtnMouseClicked
+
+    private void EtdBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EtdBtnMouseClicked
+        // TODO add your handling code here:
+        EtudiantsPane.setVisible(true);
+    }//GEN-LAST:event_EtdBtnMouseClicked
   
   
     /**
@@ -577,6 +601,7 @@ public class Admin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AjouterBtn1;
     private javax.swing.JTextField CinTxt;
+    private javax.swing.JButton EtdBtn;
     private javax.swing.JPanel EtudiantsPane;
     private javax.swing.JTextField MailTxt;
     private javax.swing.JTextField NomTxt;
@@ -584,10 +609,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JPasswordField PasswordTxt;
     private javax.swing.JTextField PrenomTxt;
     private javax.swing.JButton SideBtnEns;
+    private javax.swing.JButton StatBtn;
     private javax.swing.JButton SuppBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

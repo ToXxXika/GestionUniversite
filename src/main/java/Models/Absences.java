@@ -2,31 +2,28 @@ package Models;
 
 public class Absences {
 
-    private int idA;
-    private int idEtudiant;
+    private String idEtudiant;
     private String Matiere ;
     private int nbAbsences;
 
-    public Absences(int idA, int idEtudiant, String matiere, int nbAbsences) {
-        this.idA = idA;
+    public Absences() {
+    }
+
+    public Absences(String idEtudiant, String matiere, int nbAbsences) {
+
         this.idEtudiant = idEtudiant;
         Matiere = matiere;
         this.nbAbsences = nbAbsences;
     }
 
-    public int getIdA() {
-        return idA;
-    }
 
-    public void setIdA(int idA) {
-        this.idA = idA;
-    }
 
-    public int getIdEtudiant() {
+
+    public String getIdEtudiant() {
         return idEtudiant;
     }
 
-    public void setIdEtudiant(int idEtudiant) {
+    public void setIdEtudiant(String idEtudiant) {
         this.idEtudiant = idEtudiant;
     }
 

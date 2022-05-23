@@ -13,12 +13,14 @@ public interface UtilisateurInterface {
      boolean EtudiantSign(Etudiants E);
      boolean EnseignantSign(Enseignants E);
      boolean verifEtudiant(String cin);
-     String getEtudiantByRole(String mail);
+     String getPersonneByRole(String mail);
      List<Personne> getAllPersonne();
      boolean DeleteEtudiant(String cin);
      boolean  DeleteEnseignant(String Cin);
      boolean DeletePersonne(String Cin);
      Personne VerifEtudiant(int NumInsc);
+
+
 
 
 

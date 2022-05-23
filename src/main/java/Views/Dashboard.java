@@ -37,7 +37,6 @@ public class Dashboard extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         SideBtnEns = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -77,13 +76,6 @@ public class Dashboard extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
 
-        jButton2.setBackground(new java.awt.Color(23, 35, 51));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Etudiants");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-
         SideBtnEns.setBackground(new java.awt.Color(23, 35, 51));
         SideBtnEns.setForeground(new java.awt.Color(255, 255, 255));
         SideBtnEns.setText("Enseignants");
@@ -102,6 +94,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButton4.setBorder(null);
         jButton4.setBorderPainted(false);
         jButton4.setContentAreaFilled(false);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,7 +109,6 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4)
                     .addComponent(SideBtnEns)
-                    .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
@@ -121,13 +117,11 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(jButton1)
-                .addGap(48, 48, 48)
-                .addComponent(jButton2)
-                .addGap(39, 39, 39)
+                .addGap(76, 76, 76)
                 .addComponent(SideBtnEns)
-                .addGap(44, 44, 44)
+                .addGap(71, 71, 71)
                 .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(23, 35, 51));
@@ -201,7 +195,7 @@ public class Dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cin", "NumInsc", "Nom", "Prenom"
+                "Cin", "NumInsc", "Nom", "Prenom", "Mail"
             }
         ));
         jScrollPane1.setViewportView(jTableEtd);
@@ -269,6 +263,7 @@ public class Dashboard extends javax.swing.JFrame {
         SuppBtn.setBackground(new java.awt.Color(23, 35, 51));
         SuppBtn.setForeground(new java.awt.Color(255, 255, 255));
         SuppBtn.setText("Supprimer");
+// NOI18N
         SuppBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SuppBtnBtnClickedSupp(evt);
@@ -481,6 +476,14 @@ public class Dashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AjouterBtn1ActionPerformed
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+StatistiquesFrame statistiquesFrame = new StatistiquesFrame();
+ statistiquesFrame.pack();
+statistiquesFrame.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_jButton4ActionPerformed
+
         public void  LoadJtable(){
         jTableEtd.clearSelection();
         UserController userController = new UserController();
@@ -544,7 +547,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton SideBtnEns;
     private javax.swing.JButton SuppBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

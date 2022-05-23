@@ -2,9 +2,11 @@ package Controllers;
 
 import Database.DbConnection;
 import Interfaces.MatiereInterface;
+import Models.Matiere;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class MatiereController extends DbConnection implements MatiereInterface {
     Connection con = Connect();
@@ -66,5 +68,41 @@ try {
             e.printStackTrace();
         }
           return isExist;
+    }
+
+    @Override
+    public Matiere getMatiere(String code) {
+        Matiere matiere = null;
+        String query = "SELECT * FROM matiere WHERE nomMat = ?";
+        try {
+            PreparedStatement pst = con.prepareStatement(query);
+            pst.setString(1, code);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                matiere = new Matiere(rs.getInt("idMat"), rs.getString("nomMat"), rs.getFloat("coefMat"));
+            }
+        } catch (Exception e) {
+           System.out.println(e.getMessage()+"erreur");
+        }
+        return matiere;
+    }
+
+    @Override
+    public Matiere getMatiereById(int id) {
+        System.out.println("Matiere"+id);
+        Matiere matiere = null;
+        String query = "SELECT * FROM matiere WHERE idMat = ?";
+        try {
+                        PreparedStatement pst = con.prepareStatement(query);
+                        pst.setInt(1, id);
+                        ResultSet rs = pst.executeQuery();
+                        while (rs.next()) {
+                            matiere = new Matiere(rs.getInt("idMat"), rs.getString("nomMat"), rs.getFloat("coefMat"));
+
+                        }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return matiere;
     }
 }
