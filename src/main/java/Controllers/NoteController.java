@@ -178,23 +178,7 @@ public class NoteController extends DbConnection implements NoteInterface {
         return Res;
     }
 
-    @Override
-    public void PDFMoyenneGenerator(List<Notes> LsN,Moyenne M) {
-        Document document = new Document();
-        try{
-            FileOutputStream Fos = new FileOutputStream("Moyenne.pdf");
-            PdfWriter.getInstance(document,Fos);
-            document.open();
-            PdfPTable table = new PdfPTable(6);
-            addTableHeader(table);
-            addRows(table,LsN,M);
-            document.add(table);
-            document.close();
-            System.out.println("PDF Generated");
-        }catch (Exception E){
-             System.out.println(E.getMessage());
-        }
-    }
+
 
     @Override
     public List<Moyenne> getAllMoyenne() {
@@ -220,25 +204,5 @@ public class NoteController extends DbConnection implements NoteInterface {
         return Res;
     }
 
-    public void addTableHeader(PdfPTable table){
-        Stream.of("NumInsc","Nom","Prenom","Matiere","Note","Moyenne").forEach(columnTitle -> {
-            PdfPCell header = new PdfPCell();
-            header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            header.setBorderWidth(2);
-            header.setPhrase(new Phrase(columnTitle));
-            table.addCell(header);
-            System.out.println("Header Added");
-        });
-    }
-    public void addRows(PdfPTable table, List<Notes> Lst,Moyenne M){
-        for(Notes X : Lst){
-            table.addCell(String.valueOf(M.getNumInsc()));
-            table.addCell(M.getNom());
-            table.addCell(M.getPrenom());
-            table.addCell(M.getMatiere());
-            table.addCell(String.valueOf(X.getNote()));
-        }
-        table.addCell(String.valueOf(M.getMoyenne()));
-        System.out.println("Rows Added");
-    }
+
 }

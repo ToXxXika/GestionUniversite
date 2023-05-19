@@ -139,7 +139,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
                 int j = Ps2.executeUpdate();
                 if (j > 0) {
                     //TODO: SEND MAIL TO THE SPECIFIC USER
-                    CreateQrCode(E.getMail()+":"+E.getPassword(),E.getNom()+""+E.getPrenom(),E.getMail(),E.getPassword());
+
                     System.out.println("Etudiant Inscrit");
                     Res = true ;
                 }
@@ -149,47 +149,7 @@ public class UserController extends DbConnection implements UtilisateurInterface
         }
         return Res;
     }
-    public static void CreateQrCode(String  NomPrenom , String nameProd,String mail,String Password)throws WriterException, IOException {
-        try {
-            String qrCodeText = NomPrenom;
-            System.out.println(qrCodeText);
-            String filePath = nameProd + ".jpg";
-            int size = 250;
-            String fileType = "jpg";
-            File qrFile = new File(filePath);
-            createQrImage(qrFile, qrCodeText, size, fileType, mail,Password);
-            System.out.println("DONE");
-        } catch (IOException E) {
-            System.out.println(E.getMessage());
-        }
-    }
-    public static void createQrImage(File qrFile, String qrCodeText, int size, String fileType, String mail,String Password)throws WriterException, IOException {
-        try {
-            Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<>();
-            hintMap.put(EncodeHintType.ERROR_CORRECTION,ErrorCorrectionLevel.L);
-            QRCodeWriter qrCodeWriter = new QRCodeWriter();
-            BitMatrix byteMatrix = qrCodeWriter.encode(qrCodeText, BarcodeFormat.QR_CODE,size,size,hintMap);
-            int matrixWidth = byteMatrix.getWidth();
-            BufferedImage image =  new BufferedImage(matrixWidth,matrixWidth,BufferedImage.TYPE_INT_RGB);
-            image.createGraphics();
-            Graphics2D graphics = (Graphics2D) image.getGraphics();
-            graphics.setColor(Color.white);
-            graphics.fillRect(0,0,matrixWidth,matrixWidth);
-            graphics.setColor(Color.BLACK);
-            for (int i = 0; i < matrixWidth; i++) {
-                for (int j = 0; j < matrixWidth; j++) {
-                    if (byteMatrix.get(i, j)) {
-                        graphics.fillRect(i, j, 1, 1);
-                    }
-                }
-            }
-            ImageIO.write(image, fileType, qrFile);
 
-           SendMail(mail,Password,qrFile);
-        }catch (Exception E ){
-            System.out.println(E.getMessage());
-        }
-    }
     @Override
     public boolean EnseignantSign(Enseignants E) {
         boolean Res = false ;

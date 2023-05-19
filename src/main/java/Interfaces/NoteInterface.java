@@ -17,7 +17,7 @@ public interface NoteInterface {
 
     List<Notes> getNoteByEtudiant(String codeE);
 
-    void PDFMoyenneGenerator(List<Notes> lsa,Moyenne moyenne);
+
 
     List<Moyenne> getAllMoyenne();
 
